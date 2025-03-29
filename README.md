@@ -1,0 +1,2 @@
+# 202504_ruby-interpreter
+RubyでRubyのインタープリターを作ります

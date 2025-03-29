@@ -1,0 +1,9 @@
+services:
+  202504_ruby-interpriter:
+    container_name: 202504_ruby-interpriter
+    build: .
+    tty: true
+    ports:
+      - 3003:3003
+    volumes:
+      - .:/app

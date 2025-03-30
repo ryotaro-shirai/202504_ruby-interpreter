@@ -40,6 +40,10 @@ def evaluate(tree, env)
     env[tree[1]] = evaluate(tree[2], env)
   when "var_ref"
     env[tree[1]]
+  else
+    p("Error")
+    p("Can't evaluate:" + tree[1])
+    raise("unknown node")
   end
 end
 

@@ -5,49 +5,27 @@ def evaluate(tree)
   when "lit"
     tree[1]
   when "*"
-    left = evaluate(tree[1])
-    right = evaluate(tree[2])
-    left * right
+    evaluate(tree[1]) * evaluate(tree[2])
   when "/"
-    left = evaluate(tree[1])
-    right = evaluate(tree[2])
-    left / right
+    evaluate(tree[1]) / evaluate(tree[2])
   when "+"
-    left = evaluate(tree[1])
-    right = evaluate(tree[2])
-    left + right
+    evaluate(tree[1]) + evaluate(tree[2])
   when "-"
-    left = evaluate(tree[1])
-    right = evaluate(tree[2])
-    left - right
+    evaluate(tree[1]) - evaluate(tree[2])
   when "%"
-    left = evaluate(tree[1])
-    right = evaluate(tree[2])
-    left % right
+    evaluate(tree[1]) % evaluate(tree[2])
   when "**"
-    left = evaluate(tree[1])
-    right = evaluate(tree[2])
-    left ** right
+    evaluate(tree[1]) ** evaluate(tree[2])
   when "=="
-    left = evaluate(tree[1])
-    right = evaluate(tree[2])
-    left == right
+    evaluate(tree[1]) == evaluate(tree[2])
   when ">"
-    left = evaluate(tree[1])
-    right = evaluate(tree[2])
-    left > right
+    evaluate(tree[1]) > evaluate(tree[2])
   when ">="
-    left = evaluate(tree[1])
-    right = evaluate(tree[2])
-    left >= right
+    evaluate(tree[1]) >= evaluate(tree[2])
   when "<"
-    left = evaluate(tree[1])
-    right = evaluate(tree[2])
-    left < right
+    evaluate(tree[1]) < evaluate(tree[2])
   when "<="
-    left = evaluate(tree[1])
-    right = evaluate(tree[2])
-    left <= right
+    evaluate(tree[1]) <= evaluate(tree[2])
   end
 end
 

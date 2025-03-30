@@ -40,6 +40,8 @@ def evaluate(tree, env)
     env[tree[1]] = evaluate(tree[2], env)
   when "var_ref"
     env[tree[1]]
+  when "if"
+    evaluate(tree[1], env) ? evaluate(tree[2], env) : evaluate(tree[3], env)
   else
     p("Error")
     p("Can't evaluate:" + tree[1])

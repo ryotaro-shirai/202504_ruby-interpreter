@@ -48,7 +48,7 @@ def evaluate(tree, env)
     end
   else
     p("Error")
-    p("Can't evaluate:" + tree[1])
+    p("Can't evaluate : " + tree[0].to_s)
     raise("unknown node")
   end
 end

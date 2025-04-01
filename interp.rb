@@ -46,6 +46,11 @@ def evaluate(tree, env)
     while evaluate(tree[1], env)
       evaluate(tree[2], env)
     end
+  when "while2"
+    evaluate(tree[2], env)
+    while evaluate(tree[1], env)
+      evaluate(tree[2], env)
+    end
   else
     p("Error")
     p("Can't evaluate : " + tree[0].to_s)

@@ -1,55 +1,55 @@
 require "minruby"
 
-def evaluate(tree, env)
+def evaluate(tree, genv, lenv)
   case tree[0]
   when "lit"
     tree[1]
   when "*"
-    evaluate(tree[1], env) * evaluate(tree[2], env)
+    evaluate(tree[1], genv, lenv) * evaluate(tree[2], genv, lenv)
   when "/"
-    evaluate(tree[1], env) / evaluate(tree[2], env)
+    evaluate(tree[1], genv, lenv) / evaluate(tree[2], genv, lenv)
   when "+"
-    evaluate(tree[1], env) + evaluate(tree[2], env)
+    evaluate(tree[1], genv, lenv) + evaluate(tree[2], genv, lenv)
   when "-"
-    evaluate(tree[1], env) - evaluate(tree[2], env)
+    evaluate(tree[1], genv, lenv) - evaluate(tree[2], genv, lenv)
   when "%"
-    evaluate(tree[1], env) % evaluate(tree[2], env)
+    evaluate(tree[1], genv, lenv) % evaluate(tree[2], genv, lenv)
   when "**"
-    evaluate(tree[1], env) ** evaluate(tree[2], env)
+    evaluate(tree[1], genv, lenv) ** evaluate(tree[2], genv, lenv)
   when "=="
-    evaluate(tree[1], env) == evaluate(tree[2], env)
+    evaluate(tree[1], genv, lenv) == evaluate(tree[2], genv, lenv)
   when ">"
-    evaluate(tree[1], env) > evaluate(tree[2], env)
+    evaluate(tree[1], genv, lenv) > evaluate(tree[2], genv, lenv)
   when ">="
-    evaluate(tree[1], env) >= evaluate(tree[2], env)
+    evaluate(tree[1], genv, lenv) >= evaluate(tree[2], genv, lenv)
   when "<"
-    evaluate(tree[1], env) < evaluate(tree[2], env)
+    evaluate(tree[1], genv, lenv) < evaluate(tree[2], genv, lenv)
   when "<="
-    evaluate(tree[1], env) <= evaluate(tree[2], env)
+    evaluate(tree[1], genv, lenv) <= evaluate(tree[2], genv, lenv)
   when "func_call"          # 仮の実装
-    p(evaluate(tree[2], env))
+    p(evaluate(tree[2], genv, lenv))
   when "stmts"
     i = 1
     last = nil
     while tree[i]
-      last = evaluate(tree[i], env)
+      last = evaluate(tree[i], genv, lenv)
       i += 1
     end
     last
   when "var_assign"
-    env[tree[1]] = evaluate(tree[2], env)
+    lenv[tree[1]] = evaluate(tree[2], genv, lenv)
   when "var_ref"
-    env[tree[1]]
+    lenv[tree[1]]
   when "if"
-    evaluate(tree[1], env) ? evaluate(tree[2], env) : evaluate(tree[3], env)
+    evaluate(tree[1], genv, lenv) ? evaluate(tree[2], genv, lenv) : evaluate(tree[3], genv, lenv)
   when "while"
-    while evaluate(tree[1], env)
-      evaluate(tree[2], env)
+    while evaluate(tree[1], genv, lenv)
+      evaluate(tree[2], genv, lenv)
     end
   when "while2"
-    evaluate(tree[2], env)
-    while evaluate(tree[1], env)
-      evaluate(tree[2], env)
+    evaluate(tree[2], genv, lenv)
+    while evaluate(tree[1], genv, lenv)
+      evaluate(tree[2], genv, lenv)
     end
   else
     p("Error")
@@ -69,7 +69,8 @@ def max(tree)
   end
 end
 
-env = {}
+genv = {"p" => ["builtin", "p"]}
+lenv = {}
 str = minruby_load()
 tree = minruby_parse(str)
-evaluate(tree, env)
+evaluate(tree, genv, lenv)

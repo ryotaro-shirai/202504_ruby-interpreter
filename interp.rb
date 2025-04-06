@@ -26,8 +26,17 @@ def evaluate(tree, genv, lenv)
     evaluate(tree[1], genv, lenv) < evaluate(tree[2], genv, lenv)
   when "<="
     evaluate(tree[1], genv, lenv) <= evaluate(tree[2], genv, lenv)
-  when "func_call"          # 仮の実装
-    p(evaluate(tree[2], genv, lenv))
+  when "func_call"
+    args = []
+    i = 0
+    while tree[i+2]
+      args[i] = evaluate(tree[i+2], genv, lenv)
+      i += 1
+    end
+    mhd = genv[tree[1]]
+    if mhd[0] = "builtin"
+      minruby_call(mhd[1], args)
+    end
   when "stmts"
     i = 1
     last = nil

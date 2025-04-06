@@ -78,7 +78,7 @@ def max(tree)
   end
 end
 
-genv = {"p" => ["builtin", "p"]}
+genv = {"p" => ["builtin", "p"], "raise" => ["builtin", "raise"]}
 lenv = {}
 str = minruby_load()
 tree = minruby_parse(str)
